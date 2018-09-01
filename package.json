@@ -1,0 +1,26 @@
+{
+  "name": "openapi-combine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "swagger-parser": "^5.0.5",
+    "swagger2openapi": "^3.2.8"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.retromediation.net:1234/fabian/openapi-combine.git"
+  },
+  "keywords": [],
+  "author": "Fabian Schneider <fabbbbbi+git@googlemail.com>",
+  "license": "MIT"
+}
