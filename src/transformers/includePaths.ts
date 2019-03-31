@@ -8,19 +8,21 @@ export const includePaths = (pathsToInclude: string[]): Transformer =>
   R.over(R.lensProp('paths'), R.pick(pathsToInclude));
 
 export const includePath = (pathToInclude: string): Transformer =>
-  includePaths([pathToInclude]);
+  includePaths(R.of(pathToInclude));
 
-export const includePathOperations = (
+export const includeOperationsFromPath = (
   path: string,
   operations: Operation[]
 ): Transformer => R.over(R.lensPath(['paths', path]), R.pick(operations));
 
-export const includePathsOperations = (
-  pathsAndOperations: [string, Operation[]][]
+export const includeOperationsFromPaths = (
+  pathsAndOperations: Record<string, Operation[]>
 ): Transformer =>
   S.pipe(
-    R.map(
-      pathAndOperations => includePathOperations(...pathAndOperations),
+    // FIXME
+    // @ts-ignore
+    R.mapObjIndexed<Operation[], Transformer>(
+      (operations, path) => includeOperationsFromPath(path, operations),
       pathsAndOperations
     )
   );

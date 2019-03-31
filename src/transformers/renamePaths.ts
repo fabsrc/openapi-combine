@@ -59,16 +59,35 @@ export const renamePath = (curPath: string, newPath: string): Transformer =>
 export const renamePathsWith = (fn: (key: string) => string): Transformer =>
   R.over(R.lensProp('paths'), RA.renameKeysWith(fn));
 
+const createRegExpFromString = (stringRegExp: string) =>
+  new RegExp(stringRegExp);
+
 export const renamePathsWithRegExp = (
   renamings: [string | RegExp, string][]
 ): Transformer =>
   renamePathsWith(key => {
-    for (let renaming of renamings) {
-      const re = new RegExp(renaming[0]);
+    for (let [original, replacement] of renamings) {
+      const re = R.ifElse(RA.isNotRegExp, createRegExpFromString, R.identity)(
+        original
+      );
 
-      if (key.match(re)) {
-        return key.replace(re, renaming[1]);
+      if (R.test(re, key)) {
+        return R.replace(re, replacement, key);
       }
     }
+
     return key;
   });
+
+// export const renamePathsWithRegExp = (
+//   renamings: [string | RegExp, string][]
+// ): Transformer =>
+//   renamePathsWith(key => {
+//     for (let [original, replacement] of renamings) {
+//       const re = R.ifElse(RA.isNotRegExp, createRegExpFromString, R.identity)(
+//         original
+//       );
+
+//       return R.ifElse(R.test(re), R.replace(re, replacement), R.identity)(key);
+//     }
+//   });

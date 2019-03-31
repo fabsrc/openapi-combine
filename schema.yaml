@@ -77,6 +77,14 @@ paths:
       operationId: createPets
       tags:
         - pets
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
       responses:
         '201':
           description: Null response
@@ -86,6 +94,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    parameters:
+      - name: limit
+        in: query
+        description: How many items to return at one time (max 100)
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: paaar
+        in: query
+        description: How many items to return at one time (max 100)
+        required: false
+        schema:
+          type: integer
+          format: int32
   /pets/{petId}:
     get:
       summary: Info for a specific pet

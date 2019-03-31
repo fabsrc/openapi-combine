@@ -11,4 +11,4 @@ export const removeTags = (tags: string[]): Transformer => {
   );
 };
 
-export const removeTag = (tag: string) => removeTags([tag]);
+export const removeTag = (tag: string) => removeTags(R.of(tag));

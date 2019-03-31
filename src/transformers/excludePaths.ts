@@ -6,21 +6,21 @@ export const excludePaths = (pathsToExclude: string[]): Transformer =>
   R.over(R.lensProp('paths'), R.omit(pathsToExclude));
 
 export const excludePath = (pathToExclude: string): Transformer =>
-  excludePaths([pathToExclude]);
+  excludePaths(R.of(pathToExclude));
 
-export const excludePathOperations = (
+export const excludeOperationsFromPath = (
   path: string,
   operations: Operation[]
 ): Transformer => R.over(R.lensPath(['paths', path]), R.omit(operations));
 
-export const excludePathsOperations = (
+export const excludeOperationsFromPaths = (
   pathsAndOperations: Record<string, Operation[]>
 ): Transformer =>
   S.pipe(
     // FIXME
     // @ts-ignore
-    R.mapObjIndexed<Operation, Transformer>(
-      (operations, path) => excludePathOperations(path, operations),
+    R.mapObjIndexed<Operation[], Transformer>(
+      (operations, path) => excludeOperationsFromPath(path, operations),
       pathsAndOperations
     )
   );
