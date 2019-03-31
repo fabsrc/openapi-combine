@@ -1,2 +1,1 @@
-# openapi-combine
-
+# OpenAPI Combine
