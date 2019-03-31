@@ -3,30 +3,30 @@ import {
   includePaths,
   includePath,
   includeOperationsFromPath,
-  includeOperationsFromPaths
+  includeOperationsFromPaths,
 } from '..';
-import { Operation } from 'types';
+import { Operation } from '../../types';
 
 const testSchema: OpenAPIV3.Document = {
   openapi: '3.0.0',
   info: {
     title: 'TestSchema',
-    version: '0'
+    version: '0',
   },
   paths: {
     '/test/first': {
       get: {},
-      post: {}
+      post: {},
     },
     '/test/second': {
       get: {},
-      post: {}
+      post: {},
     },
     '/test/third': {
       get: {},
-      post: {}
-    }
-  }
+      post: {},
+    },
+  },
 };
 
 describe('includePaths', () => {
@@ -54,7 +54,7 @@ describe('includeOperationsFromPath', () => {
     const testPath = '/test/first';
     const testOperations = [Operation.POST];
     const result = includeOperationsFromPath(testPath, testOperations)(
-      testSchema
+      testSchema,
     );
     expect(Object.keys(result.paths[testPath])).toHaveLength(1);
     expect(result).toHaveProperty(['paths', testPath, testOperations[0]]);
@@ -65,10 +65,10 @@ describe('includeOperationsFromPaths', () => {
   it('includes specified operations from paths in schema', () => {
     const testPathsAndOperations = {
       '/test/first': [Operation.GET],
-      '/test/second': [Operation.POST]
+      '/test/second': [Operation.POST],
     };
     const result = includeOperationsFromPaths(testPathsAndOperations)(
-      testSchema
+      testSchema,
     );
     expect(Object.keys(result.paths['/test/first'])).toHaveLength(1);
     expect(result).toHaveProperty(['paths', '/test/first', Operation.GET]);

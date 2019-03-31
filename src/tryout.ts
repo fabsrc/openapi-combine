@@ -5,28 +5,27 @@ import { OpenAPIV3 } from 'openapi-types';
 import {
   renamePath,
   renamePaths,
-  renamePathsWith,
-  renamePathsWithRegExp
+  renamePathsWithRegExp,
 } from './transformers/renamePaths';
 import {
   excludePaths,
   excludePath,
   excludeOperationsFromPath,
-  excludeOperationsFromPaths
+  excludeOperationsFromPaths,
 } from './transformers/excludePaths';
 import {
   includePaths,
   includePath,
   includeOperationsFromPath,
-  includeOperationsFromPaths
+  includeOperationsFromPaths,
 } from './transformers/includePaths';
 import { removeTags, removeTag } from './transformers/removeTags';
-import { Operation } from 'types';
+import { Operation } from './types';
 import {
   excludeParameterFromPathOperation,
   excludeParameterFromPath,
   excludeParametersFromPath,
-  excludeParametersFromPathOperation
+  excludeParametersFromPathOperation,
 } from './transformers/excludeParameters';
 import { includeParametersFromPath } from './transformers';
 
@@ -35,7 +34,7 @@ const schema = __dirname + '/../schema.yaml';
 (async () => {
   let bundledSchema: OpenAPIV3.Document = await SwaggerParser.bundle(
     schema,
-    {}
+    {},
   );
 
   const transform = R.pipe(
@@ -47,8 +46,8 @@ const schema = __dirname + '/../schema.yaml';
     //   }
     //   return key;
     // })
-    renamePathsWithRegExp([[/\/(.*)\/{petId}/, '/werwerwe/$1']]),
-    renamePathsWithRegExp([['/(.*)/{petId}', '/werwerwe/$1']]),
+    // renamePathsWithRegExp([[/\/(.*)\/{petId}/, '/werwerwe/$1']]),
+    // renamePathsWithRegExp([['/(.*)/{petId}', '/werwerwe/$1']]),
     // excludePaths(['/pets/{petId}']),
     // excludePath('/pets'),
     // includePaths(['/pets/{petId}']),
@@ -56,7 +55,7 @@ const schema = __dirname + '/../schema.yaml';
     includeOperationsFromPaths({ '/pets': [Operation.GET] }),
     excludeOperationsFromPath('/pets', [Operation.POST, Operation.GET]),
     excludeOperationsFromPaths({ '/pets': [Operation.POST, Operation.GET] }),
-    removeTags(['pets'])
+    removeTags(['pets']),
     // removeTag('pets'),
     // excludeParametersFromPathOperation('/pets', Operation.GET, ['limit'])
     // excludeParametersFromPath('/pets', ['limit', 'paaar']),

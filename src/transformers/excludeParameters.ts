@@ -1,36 +1,37 @@
-import * as R from 'ramda';
+import R from 'ramda';
 import { Transformer, Operation } from '../types';
+import { overIf } from '../utils';
 
 const rejectByParameterNames = (parameterNames: string[]) =>
   R.reject(R.where({ name: R.flip(R.includes)(parameterNames) }));
 
 export const excludeParametersFromPath = (
   path: string,
-  parameterNames: string[]
+  parameterNames: string[],
 ): Transformer =>
-  R.over(
+  overIf(
     R.lensPath(['paths', path, 'parameters']),
-    rejectByParameterNames(parameterNames)
+    rejectByParameterNames(parameterNames),
   );
 
 export const excludeParameterFromPath = (
   path: string,
-  parameterName: string
+  parameterName: string,
 ): Transformer => excludeParametersFromPath(path, R.of(parameterName));
 
 export const excludeParametersFromPathOperation = (
   path: string,
   operation: Operation,
-  parameterNames: string[]
+  parameterNames: string[],
 ): Transformer =>
-  R.over(
+  overIf(
     R.lensPath(['paths', path, operation, 'parameters']),
-    rejectByParameterNames(parameterNames)
+    rejectByParameterNames(parameterNames),
   );
 
 export const excludeParameterFromPathOperation = (
   path: string,
   operation: Operation,
-  parameterName: string
+  parameterName: string,
 ): Transformer =>
   excludeParametersFromPathOperation(path, operation, R.of(parameterName));
