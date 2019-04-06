@@ -4,26 +4,27 @@ import {
   renamePath,
   renamePathsWithFn,
   renamePathsWithRegExp,
+  prependPaths
 } from '..';
 
 const testSchema: OpenAPIV3.Document = {
   openapi: '3.0.0',
   info: {
     title: 'TestSchema',
-    version: '0',
+    version: '0'
   },
   paths: {
     '/test/first': {},
     '/test/second': {},
-    '/test/third': {},
-  },
+    '/test/third': {}
+  }
 };
 
 describe('renamePaths', () => {
   it('renames multiple paths', () => {
     const fn = renamePaths({
       '/test/first': '/rename/first',
-      '/test/second': '/rename/second',
+      '/test/second': '/rename/second'
     });
     const result = fn(testSchema);
     expect(result).toHaveProperty('paths./rename/first');
@@ -69,5 +70,15 @@ describe('renamePathsWithRegExp', () => {
     expect(result).toHaveProperty(['paths', '/rename/first']);
     expect(result).toHaveProperty(['paths', '/rename/second']);
     expect(result).toHaveProperty(['paths', '/rename/third']);
+  });
+});
+
+describe('prependPaths', () => {
+  it('prepends a string to all paths', () => {
+    const fn = prependPaths('/baseTest');
+    const result = fn(testSchema);
+    expect(result).toHaveProperty(['paths', '/baseTest/test/first']);
+    expect(result).toHaveProperty(['paths', '/baseTest/test/second']);
+    expect(result).toHaveProperty(['paths', '/baseTest/test/third']);
   });
 });

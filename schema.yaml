@@ -15,26 +15,26 @@ x-combine:
         auth:
           username: 123
           password: 123
-    paths:
-      $base: '/external'
-      $rename:
-        - re~/asd/: 123
-      '/pets': $exclude
-      '/pets/yolo':
-        get: $exclude
-      '/pets/{petId}:':
-        get:
-          tags:
-            - pets: $exclude
-            - asd: $rename("nope")
-            - yolo
-          parameters:
-            - limit: $include
-            - other: $rename("yolo")
-          responses:
-            '200': $exclude
-            '202': $map("/pets.get.responses.300")
-      '/pets/asd': $rename("/yolo/123")
+    # paths:
+    #   $base: '/external'
+    #   $rename:
+    #     - re~/asd/: 123
+    #   '/pets': $exclude
+    #   '/pets/yolo':
+    #     get: $exclude
+    #   '/pets/{petId}:':
+    #     get:
+    #       tags:
+    #         - pets: $exclude
+    #         - asd: $rename("nope")
+    #         - yolo
+    #       parameters:
+    #         - limit: $include
+    #         - other: $rename("yolo")
+    #       responses:
+    #         '200': $exclude
+    #         '202': $map("/pets.get.responses.300")
+    #   '/pets/asd': $rename("/yolo/123")
 
 servers:
   - url: http://petstore.swagger.io/v1

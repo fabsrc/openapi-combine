@@ -2,7 +2,7 @@ const SwaggerParser = require('swagger-parser')
 const converter = require('swagger2openapi')
 
 class OpenApiCombine {
-  static async combine (schema, options = {}) {
+  static async combine(schema, options = {}) {
     try {
       const bundledSchema = await SwaggerParser.bundle(schema, options)
       let combineSchemas = []
@@ -20,7 +20,9 @@ class OpenApiCombine {
         // Convert schemas to OAS 3.0
         await Promise.all(combineSchemas.map(async (combineSchema) => {
           if (combineSchema.resolvedSchema) {
-            const { openapi } = await converter.convertObj(combineSchema.resolvedSchema, {})
+            const {
+              openapi
+            } = await converter.convertObj(combineSchema.resolvedSchema, {})
             combineSchema.resolvedAndConvertedSchema = openapi
           }
         }))
