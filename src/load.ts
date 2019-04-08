@@ -16,7 +16,7 @@ export const load: (
   R.ifElse(
     RA.isString,
     stringSchema => bundle(stringSchema),
-    schema => Promise.resolve(schema)
+    async schema => schema
   ),
   R.then(
     R.when(
