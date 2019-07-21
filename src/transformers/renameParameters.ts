@@ -15,7 +15,7 @@ export const renameParametersWithRegExp = (
   replacement: string
 ): Transformer =>
   renameParametersWithFn(
-    R.replace(R.constructN(1, RegExp)(pattern), replacement)
+    R.replace(R.constructN(1, RegExp)(pattern as RegExp), replacement)
   );
 
 export const renameParametersWithFn = (fn: (key: string) => string) =>

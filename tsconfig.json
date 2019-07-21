@@ -4,12 +4,13 @@
     "module": "commonjs",
     "lib": ["esnext"],
     "declaration": true,
-    "outDir": "dist",
-    "rootDir": "src",
-    "incremental": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
     "strict": true,
     "moduleResolution": "node",
     "typeRoots": ["./node_modules/@types", "./types"],
     "esModuleInterop": true
-  }
+  },
+  "include": ["./src"],
+  "exclude": ["./**/__tests__"]
 }

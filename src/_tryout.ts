@@ -1,6 +1,6 @@
 import R from 'ramda';
 import SwaggerParser from 'swagger-parser';
-import { OpenAPIV3 } from 'openapi-types';
+import { OpenAPI, OpenAPIV3 } from 'openapi-types';
 import {
   renamePath,
   renamePaths,
@@ -31,7 +31,7 @@ import { includeParametersFromPath } from './transformers';
 const schema = __dirname + '/../schema.yaml';
 
 (async () => {
-  let bundledSchema: OpenAPIV3.Document = await SwaggerParser.bundle(
+  let bundledSchema: OpenAPI.Document = await SwaggerParser.bundle(
     schema,
     {}
   );
@@ -61,6 +61,6 @@ const schema = __dirname + '/../schema.yaml';
     // includeParametersFromPath('/pets', ['paaar'])
   );
 
-  console.log(JSON.stringify(transform(bundledSchema).paths, null, 2));
+  console.log(JSON.stringify(transform(bundledSchema as OpenAPIV3.Document).paths, null, 2));
   // transform(bundledSchema);
 })();
