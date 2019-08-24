@@ -27,3 +27,6 @@ const mergePlan = (x: any, y: any): any => {
 };
 
 export const deepMerge = R.mergeWith(mergePlan);
+
+export const promiseAll = <T>(values: (T | PromiseLike<T>)[]): Promise<T[]> =>
+  Promise.all(values);

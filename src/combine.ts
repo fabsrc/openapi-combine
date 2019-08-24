@@ -1,17 +1,15 @@
-import { OpenAPIV3, OpenAPIV2 } from 'openapi-types';
+import { OpenAPIV3, OpenAPIV2, OpenAPI } from 'openapi-types';
 import * as R from 'ramda';
 import { load } from './load';
 import { Transformer } from './types';
 import { transform } from './transform';
+import { promiseAll } from './utils';
 
 export interface CombineConfig {
-  source: string | OpenAPIV3.Document | OpenAPIV2.Document;
+  source: string | OpenAPI.Document;
   transformers?: Transformer[];
   options?: object;
 }
-
-const prAll = <T>(values: (T | PromiseLike<T>)[]): Promise<T[]> =>
-  Promise.all(values);
 
 const concatValues = (k: string, l: any, r: any) => {
   if (k === 'openapi') {
@@ -51,7 +49,7 @@ export const combine: (
     source: await load(config.source),
     transformers: config.transformers
   })),
-  prAll,
+  promiseAll,
   R.then(R.map(config => transform(config.transformers || [], config.source))),
   // R.then(R.map(R.omit(['info']))),
   R.then(R.reduce<OpenAPIV3.Document, object>(a, {})),

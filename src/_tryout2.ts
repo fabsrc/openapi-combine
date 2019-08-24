@@ -9,7 +9,9 @@ const schemaOptionsV2: CombineConfig = {
       title: 'Hello World v2',
       version: '2.0.0'
     },
-    paths: {}
+    paths: {
+      '/test': {}
+    }
   }
 };
 
@@ -41,8 +43,13 @@ const schemaOptionsLocal: CombineConfig = {
   source: './schema.yaml'
 };
 
-combine([schemaOptionsRemoteV2, schemaOptionsV3])
+combine([
+  schemaOptionsRemoteV2,
+  schemaOptionsV3,
+  { source: { openapi: '3.0', info: { title: 'test', version: '1.2.3' }, paths: {} } }
+])
   .then(res => {
+    console.log('----');
     console.log(res);
   })
   .catch(console.error);
