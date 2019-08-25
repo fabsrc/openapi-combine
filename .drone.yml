@@ -1,0 +1,32 @@
+---
+kind: pipeline
+name: node8
+
+steps:
+- name: test
+  image: node:8-alpine
+  commands:
+  - npm install
+  - npm test
+
+---
+kind: pipeline
+name: node10
+
+steps:
+- name: test
+  image: node:10-alpine
+  commands:
+  - npm install
+  - npm test
+
+---
+kind: pipeline
+name: node12
+
+steps:
+- name: test
+  image: node:12-alpine
+  commands:
+  - npm install
+  - npm test
