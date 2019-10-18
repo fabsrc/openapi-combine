@@ -1,1 +1,13 @@
-export { load } from './load';
+import * as R from 'ramda';
+import { load } from './load';
+import { combine } from './combine';
+
+const prAll = (x: Promise<any>[]) => Promise.all(x);
+
+const loadAndCombine = R.pipe(
+  R.map(load),
+  prAll,
+  R.then(combine),
+);
+
+export { load, combine, loadAndCombine };
