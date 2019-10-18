@@ -2,7 +2,7 @@ import { OpenAPIV3 } from 'openapi-types';
 import { mergeDeepLeft, map } from 'ramda';
 import { combine } from '../combine';
 
-const createTestSchema = (data?: Partial<OpenAPIV3.Document>): OpenAPIV3.Document =>
+const createTestSchema = (data: Partial<OpenAPIV3.Document> = {}): OpenAPIV3.Document =>
   mergeDeepLeft(data, {
     openapi: '3.0.0',
     info: {

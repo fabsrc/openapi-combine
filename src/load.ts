@@ -1,5 +1,5 @@
 import { OpenAPIV3, OpenAPIV2, OpenAPI } from 'openapi-types';
-import { convertObj } from 'swagger2openapi';
+import { convertObj as convertToOpenAPI } from 'swagger2openapi';
 import { bundle } from 'swagger-parser';
 import * as R from 'ramda';
 import * as RA from 'ramda-adjunct';
@@ -13,7 +13,7 @@ export const load: (source: string | OpenAPI.Document) => Promise<OpenAPIV3.Docu
     R.when(
       isOpenApiV2Schema,
       R.pipe(
-        R.partialRight(convertObj, [{}]),
+        R.partialRight(convertToOpenAPI, [{}]),
         R.then(R.prop('openapi')),
       ),
     ),
