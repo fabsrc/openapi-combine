@@ -4,7 +4,10 @@ import * as R from 'ramda';
 const mergeDeepAll = R.reduce<any, any>(R.mergeDeepRight, {});
 
 const combineInfo = (infoObjects: OpenAPIV3.InfoObject[]): OpenAPIV3.InfoObject =>
-  R.last(infoObjects);
+  R.last(infoObjects) || {
+    title: '',
+    version: '',
+  };
 
 const combineServers = (serversObjects: OpenAPIV3.ServerObject[][]): OpenAPIV3.ServerObject[] =>
   R.flatten(serversObjects);
@@ -25,7 +28,7 @@ const combineTags = (tagsObjects: OpenAPIV3.TagObject[][]): OpenAPIV3.TagObject[
 
 const combineExternalDocs = (
   externalDocObjects: OpenAPIV3.ExternalDocumentationObject[],
-): OpenAPIV3.ExternalDocumentationObject => R.last(externalDocObjects);
+): OpenAPIV3.ExternalDocumentationObject | undefined => R.last(externalDocObjects);
 
 const pluckIfExists = (key: string, objs: any) =>
   R.pipe<Record<string, any>[], Record<string, any>[], any[]>(
