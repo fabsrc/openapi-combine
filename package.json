@@ -35,7 +35,8 @@
     "test": "jest",
     "prepack": "npm run build",
     "build": "tsc",
-    "lint": "eslint 'src/**'"
+    "lint": "eslint 'src/**'",
+    "fmt": "prettier --write 'src/**'"
   },
   "repository": {
     "type": "git",

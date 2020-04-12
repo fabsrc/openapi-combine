@@ -8,14 +8,15 @@ const isOpenApiV2Schema = (schema: OpenAPI.Document): schema is OpenAPIV2.Docume
   !!(schema as OpenAPIV2.Document).swagger;
 
 export const load: (source: string | OpenAPI.Document) => Promise<OpenAPIV3.Document> = R.pipe(
-  R.ifElse(RA.isString, stringSchema => bundle(stringSchema), async schema => schema),
+  R.ifElse(
+    RA.isString,
+    (stringSchema) => bundle(stringSchema),
+    async (schema) => schema,
+  ),
   R.andThen(
     R.when(
       isOpenApiV2Schema,
-      R.pipe(
-        R.partialRight(convertToOpenAPI, [{}]),
-        R.andThen(R.prop('openapi')),
-      ),
+      R.pipe(R.partialRight(convertToOpenAPI, [{}]), R.andThen(R.prop('openapi'))),
     ),
   ),
 );

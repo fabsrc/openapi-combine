@@ -19,7 +19,7 @@ describe('combine', () => {
   });
 
   it('returns `info` field from last schema', () => {
-    const testSchemas = map(idx => createTestSchema({ info: { title: idx, version: idx } }), [
+    const testSchemas = map((idx) => createTestSchema({ info: { title: idx, version: idx } }), [
       'schema1',
       'schema2',
       'schema3',
