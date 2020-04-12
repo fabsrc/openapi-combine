@@ -22,12 +22,12 @@ const testSchemaV2: OpenAPIV2.Document = {
 
 describe('load', () => {
   it('loads JSON file', async () => {
-    const res = await load(path.join(__dirname, './openapi.json'));
+    const res = await load(path.join(__dirname, './fixtures/openapi.json'));
     expect(res).toHaveProperty('openapi');
   });
 
   it('loads YAML file', async () => {
-    const res = await load(path.join(__dirname, './openapi.yaml'));
+    const res = await load(path.join(__dirname, './fixtures/openapi.yaml'));
     expect(res).toHaveProperty('openapi');
   });
 
