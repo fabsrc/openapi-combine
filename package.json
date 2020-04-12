@@ -49,15 +49,5 @@
     "combine"
   ],
   "author": "Fabian Schneider <fabbbbbi+git@googlemail.com>",
-  "license": "MIT",
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "rootDir": "src",
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "**/*.ts"
-    ],
-    "coverageDirectory": "../coverage"
-  }
+  "license": "MIT"
 }
