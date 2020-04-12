@@ -8,28 +8,28 @@
     "example": "examples"
   },
   "dependencies": {
-    "ramda": "^0.26.1",
-    "ramda-adjunct": "^2.21.0",
-    "sanctuary": "^2.0.0",
-    "swagger-parser": "^8.0.2",
-    "swagger2openapi": "^5.3.1"
+    "ramda": "^0.27.0",
+    "ramda-adjunct": "^2.26.0",
+    "sanctuary": "^3.0.0",
+    "swagger-parser": "^9.0.1",
+    "swagger2openapi": "^6.0.2"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.19",
-    "@types/node": "^12.11.1",
-    "@types/ramda": "^0.26.33",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.11.1",
+    "@types/ramda": "^0.27.3",
     "@types/sanctuary": "^0.14.2",
-    "@typescript-eslint/eslint-plugin": "^2.4.0",
-    "@typescript-eslint/parser": "^2.4.0",
-    "eslint": "^6.5.1",
-    "eslint-config-prettier": "^6.4.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "jest": "^24.9.0",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "jest": "^25.3.0",
     "openapi-types": "^1.3.5",
-    "prettier": "^1.18.2",
-    "ts-jest": "^24.1.0",
-    "ts-node": "^8.4.1",
-    "typescript": "^3.6.4"
+    "prettier": "^2.0.4",
+    "ts-jest": "^25.3.1",
+    "ts-node": "^8.8.2",
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "test": "jest",
