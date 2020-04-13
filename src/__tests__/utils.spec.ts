@@ -1,5 +1,5 @@
 import R from 'ramda';
-import { overIf, overPaths, eachPath, eachOperation } from '../utils';
+import { overIf, overPaths, overPath, eachPath, eachOperation } from '../utils';
 
 describe('overIf', () => {
   it('invokes over fn if key exists', () => {
@@ -32,6 +32,25 @@ describe('overPaths', () => {
   it('invokes over fn on paths', () => {
     fn({ paths: testPaths });
     expect(spyFn).toHaveBeenCalledWith(testPaths);
+  });
+});
+
+describe('overPath', () => {
+  const testPaths = {
+    '/hello': {
+      get: {},
+      post: {},
+    },
+    '/test': {
+      get: {}
+    }
+  };
+
+  it('invokes over fn on path', () => {
+    const spyFn = jest.fn();
+    const fn = overPath('/hello', spyFn);
+    fn({ paths: testPaths });
+    expect(spyFn).toHaveBeenCalledWith(testPaths['/hello']);
   });
 });
 
