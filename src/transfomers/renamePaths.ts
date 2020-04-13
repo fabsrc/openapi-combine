@@ -12,11 +12,7 @@ export const renamePath = (curPath: string, newPath: string): Transformer =>
 export const renamePathsWithFn = (fn: (key: string) => string): Transformer =>
   overPaths(RA.renameKeysWith(fn));
 
-export const renamePathsWithRegExp = (
-  pattern: string | RegExp,
-  replacement: string
-): Transformer =>
+export const renamePathsWithRegExp = (pattern: string | RegExp, replacement: string): Transformer =>
   renamePathsWithFn(R.replace(R.constructN(1, RegExp)(pattern as RegExp), replacement));
 
-export const prependPaths = (base: string) =>
-  renamePathsWithRegExp(/(.*)/, `${base}$1`);
+export const prependPaths = (base: string) => renamePathsWithRegExp(/(.*)/, `${base}$1`);

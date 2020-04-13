@@ -34,7 +34,7 @@ describe('includePaths', () => {
     const testPaths = ['/test/first', '/test/second'];
     const result = includePaths(testPaths)(testSchema);
     expect(Object.keys(result.paths)).toHaveLength(testPaths.length);
-    testPaths.forEach(testPath => {
+    testPaths.forEach((testPath) => {
       expect(result).toHaveProperty(['paths', testPath]);
     });
   });
@@ -53,9 +53,7 @@ describe('includeOperationsFromPath', () => {
   it('includes specified operations from path in schema', () => {
     const testPath = '/test/first';
     const testOperations = [Operation.POST];
-    const result = includeOperationsFromPath(testPath, testOperations)(
-      testSchema,
-    );
+    const result = includeOperationsFromPath(testPath, testOperations)(testSchema);
     expect(Object.keys(result.paths[testPath])).toHaveLength(1);
     expect(result).toHaveProperty(['paths', testPath, testOperations[0]]);
   });
@@ -67,9 +65,7 @@ describe('includeOperationsFromPaths', () => {
       '/test/first': [Operation.GET],
       '/test/second': [Operation.POST],
     };
-    const result = includeOperationsFromPaths(testPathsAndOperations)(
-      testSchema,
-    );
+    const result = includeOperationsFromPaths(testPathsAndOperations)(testSchema);
     expect(Object.keys(result.paths['/test/first'])).toHaveLength(1);
     expect(result).toHaveProperty(['paths', '/test/first', Operation.GET]);
     expect(Object.keys(result.paths['/test/second'])).toHaveLength(1);

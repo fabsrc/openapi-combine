@@ -34,7 +34,7 @@ describe('excludePaths', () => {
     const testPaths = ['/test/first', '/test/second'];
     const fn = excludePaths(testPaths);
     const res = fn(testSchema);
-    testPaths.forEach(testPath => {
+    testPaths.forEach((testPath) => {
       expect(res).not.toHaveProperty(['paths', testPath]);
     });
   });
@@ -53,11 +53,7 @@ describe('excludeOperationsFromPath', () => {
     const testPath = '/test/first';
     const testOperations = [Operation.POST];
     const fn = excludeOperationsFromPath(testPath, testOperations);
-    expect(fn(testSchema)).not.toHaveProperty([
-      'paths',
-      testPath,
-      testOperations[0],
-    ]);
+    expect(fn(testSchema)).not.toHaveProperty(['paths', testPath, testOperations[0]]);
   });
 });
 
@@ -67,14 +63,8 @@ describe('excludeOperationsFromPaths', () => {
       '/test/first': [Operation.GET],
       '/test/second': [Operation.POST],
     };
-    const result = excludeOperationsFromPaths(testPathsAndOperations)(
-      testSchema,
-    );
+    const result = excludeOperationsFromPaths(testPathsAndOperations)(testSchema);
     expect(result).not.toHaveProperty(['paths', '/test/first', Operation.GET]);
-    expect(result).not.toHaveProperty([
-      'paths',
-      '/test/second',
-      Operation.POST,
-    ]);
+    expect(result).not.toHaveProperty(['paths', '/test/second', Operation.POST]);
   });
 });

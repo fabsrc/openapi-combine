@@ -3,5 +3,5 @@ export const enum Operation {
   POST = 'post',
   PUT = 'put',
   PATCH = 'patch',
-  DELETE = 'delete'
+  DELETE = 'delete',
 }

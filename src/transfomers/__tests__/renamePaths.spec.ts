@@ -4,27 +4,27 @@ import {
   renamePath,
   renamePathsWithFn,
   renamePathsWithRegExp,
-  prependPaths
+  prependPaths,
 } from '../renamePaths';
 
 const testSchema: OpenAPIV3.Document = {
   openapi: '3.0.0',
   info: {
     title: 'TestSchema',
-    version: '0'
+    version: '0',
   },
   paths: {
     '/test/first': {},
     '/test/second': {},
-    '/test/third': {}
-  }
+    '/test/third': {},
+  },
 };
 
 describe('renamePaths', () => {
   it('renames multiple paths', () => {
     const fn = renamePaths({
       '/test/first': '/rename/first',
-      '/test/second': '/rename/second'
+      '/test/second': '/rename/second',
     });
     const result = fn(testSchema);
     expect(result).toHaveProperty('paths./rename/first');
@@ -49,7 +49,7 @@ describe('renamePathsWithFn', () => {
     renamePathsWithFn(mockFn)(testSchema);
     const pathNames = Object.keys(testSchema.paths);
     expect(mockFn).toHaveBeenCalledTimes(pathNames.length);
-    pathNames.forEach(pathName => {
+    pathNames.forEach((pathName) => {
       expect(mockFn).toHaveBeenCalledWith(pathName);
     });
   });

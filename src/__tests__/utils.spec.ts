@@ -42,8 +42,8 @@ describe('overPath', () => {
       post: {},
     },
     '/test': {
-      get: {}
-    }
+      get: {},
+    },
   };
 
   it('invokes over fn on path', () => {

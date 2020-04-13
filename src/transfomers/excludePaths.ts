@@ -10,10 +10,8 @@ export const excludePaths = (pathsToExclude: string[]): Transformer =>
 export const excludePath = (pathToExclude: string): Transformer =>
   excludePaths(R.of(pathToExclude));
 
-export const excludeOperationsFromPath = (
-  path: string,
-  operations: Operation[],
-): Transformer => overPath(path, R.omit(operations))
+export const excludeOperationsFromPath = (path: string, operations: Operation[]): Transformer =>
+  overPath(path, R.omit(operations));
 
 export const excludeOperationsFromPaths = (
   pathsAndOperations: Record<string, Operation[]>,
