@@ -1,4 +1,4 @@
-import { OpenAPIV3, OpenAPIV2} from "openapi-types";
+import { OpenAPIV3, OpenAPIV2 } from "openapi-types";
 import { Transformer } from "./Transformer";
 
 export interface Config {
