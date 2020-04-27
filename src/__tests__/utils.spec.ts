@@ -1,27 +1,27 @@
-import R from 'ramda';
-import { overIf, overPaths, overPath, eachPath, eachOperation } from '../utils';
+import R from "ramda";
+import { overIf, overPaths, overPath, eachPath, eachOperation } from "../utils";
 
-describe('overIf', () => {
-  it('invokes over fn if key exists', () => {
+describe("overIf", () => {
+  it("invokes over fn if key exists", () => {
     const spyFn = jest.fn();
-    const fn = overIf(R.lensProp('test'), spyFn);
-    fn({ test: 'hello' });
-    expect(spyFn).toHaveBeenCalledWith('hello');
+    const fn = overIf(R.lensProp("test"), spyFn);
+    fn({ test: "hello" });
+    expect(spyFn).toHaveBeenCalledWith("hello");
   });
 
-  it('does not invoke over fn if key does not exists', () => {
+  it("does not invoke over fn if key does not exists", () => {
     const spyFn = jest.fn();
-    const fn = overIf(R.lensProp('test'), spyFn);
-    fn({ not: 'hello' });
+    const fn = overIf(R.lensProp("test"), spyFn);
+    fn({ not: "hello" });
     expect(spyFn).not.toHaveBeenCalled();
   });
 });
 
-describe('overPaths', () => {
+describe("overPaths", () => {
   const spyFn = jest.fn();
   const fn = overPaths(spyFn);
   const testPaths = {
-    '/hello': {
+    "/hello": {
       get: {},
       post: {},
     },
@@ -29,74 +29,74 @@ describe('overPaths', () => {
 
   beforeEach(() => spyFn.mockReset());
 
-  it('invokes over fn on paths', () => {
+  it("invokes over fn on paths", () => {
     fn({ paths: testPaths });
     expect(spyFn).toHaveBeenCalledWith(testPaths);
   });
 });
 
-describe('overPath', () => {
+describe("overPath", () => {
   const testPaths = {
-    '/hello': {
+    "/hello": {
       get: {},
       post: {},
     },
-    '/test': {
+    "/test": {
       get: {},
     },
   };
 
-  it('invokes over fn on path', () => {
+  it("invokes over fn on path", () => {
     const spyFn = jest.fn();
-    const fn = overPath('/hello', spyFn);
+    const fn = overPath("/hello", spyFn);
     fn({ paths: testPaths });
-    expect(spyFn).toHaveBeenCalledWith(testPaths['/hello']);
+    expect(spyFn).toHaveBeenCalledWith(testPaths["/hello"]);
   });
 });
 
-describe('eachPath', () => {
+describe("eachPath", () => {
   const spyFn = jest.fn();
   const fn = eachPath(spyFn);
   const testPaths = {
-    '/hello': {
+    "/hello": {
       get: {},
       post: {},
     },
-    '/test': {
+    "/test": {
       get: {},
     },
   };
 
-  it('invokes fn on each path', () => {
+  it("invokes fn on each path", () => {
     fn({ paths: testPaths });
     expect(spyFn).toHaveBeenCalledTimes(2);
-    expect(spyFn).toHaveBeenNthCalledWith(1, testPaths['/hello']);
-    expect(spyFn).toHaveBeenNthCalledWith(2, testPaths['/test']);
+    expect(spyFn).toHaveBeenNthCalledWith(1, testPaths["/hello"]);
+    expect(spyFn).toHaveBeenNthCalledWith(2, testPaths["/test"]);
   });
 });
 
-describe('eachOperation', () => {
+describe("eachOperation", () => {
   const spyFn = jest.fn();
   const fn = eachOperation(spyFn);
   const testPaths = {
-    '/hello': {
+    "/hello": {
       get: {},
       post: {},
     },
-    '/test': {
+    "/test": {
       put: {},
     },
-    '/v2/test': {
+    "/v2/test": {
       put: {},
     },
   };
 
-  it('invokes fn on each operation of each path', () => {
+  it("invokes fn on each operation of each path", () => {
     fn({ paths: testPaths });
     expect(spyFn).toHaveBeenCalledTimes(4);
-    expect(spyFn).toHaveBeenNthCalledWith(1, testPaths['/hello']['get']);
-    expect(spyFn).toHaveBeenNthCalledWith(2, testPaths['/hello']['post']);
-    expect(spyFn).toHaveBeenNthCalledWith(3, testPaths['/test']['put']);
-    expect(spyFn).toHaveBeenNthCalledWith(4, testPaths['/v2/test']['put']);
+    expect(spyFn).toHaveBeenNthCalledWith(1, testPaths["/hello"]["get"]);
+    expect(spyFn).toHaveBeenNthCalledWith(2, testPaths["/hello"]["post"]);
+    expect(spyFn).toHaveBeenNthCalledWith(3, testPaths["/test"]["put"]);
+    expect(spyFn).toHaveBeenNthCalledWith(4, testPaths["/v2/test"]["put"]);
   });
 });

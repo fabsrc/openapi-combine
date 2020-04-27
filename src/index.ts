@@ -1,6 +1,6 @@
-import * as R from 'ramda';
-import { load } from './load';
-import { combine } from './combine';
+import * as R from "ramda";
+import { load } from "./load";
+import { combine } from "./combine";
 
 const prAll = (x: Promise<any>[]) => Promise.all(x);
 
