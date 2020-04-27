@@ -15,3 +15,5 @@ export const overPath = R.curry((path: string, fn: R.Arity1Fn) =>
 export const eachPath = (fn: R.Arity1Fn) => overPaths(R.map(fn));
 
 export const eachOperation = (fn: R.Arity1Fn) => eachPath(R.map(fn));
+
+export const promiseAll = (x: Promise<any>[]) => Promise.all(x);
