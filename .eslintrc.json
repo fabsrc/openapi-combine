@@ -10,6 +10,6 @@
     "sourceType": "module"
   },
   "rules": {
-    "@typescript-eslint/ban-ts-ignore": "off" // TODO: Remove exception rule
+    "@typescript-eslint/ban-ts-comment": "warn" // TODO: Remove exception rule
   }
 }
