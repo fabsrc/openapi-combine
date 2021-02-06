@@ -4,7 +4,9 @@ export const overIf = R.curry((lens, fn) =>
   R.unless(R.o(R.isNil, R.view(lens)), R.over(lens, fn))
 );
 
-export const overPaths = <T>(fn: R.Arity1Fn): T =>
+export const overPaths = <T>(
+  fn: R.Arity1Fn
+): ((a: { paths: T }) => { paths: T }) =>
   overIf(
     R.lensPath<T>(["paths"]),
     fn
