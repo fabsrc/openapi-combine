@@ -32,13 +32,13 @@ describe("addTags", () => {
   const result = fn(testSchema);
 
   it("appends tags to existing tags in path operations", () => {
-    expect(result.paths["/test/first"].get!.tags).toEqual(
+    expect(result?.paths?.["/test/first"]?.get?.tags).toEqual(
       expect.arrayContaining(["TEST_TAG_ONE", "ADD_TAG_ONE", "ADD_TAG_TWO"])
     );
   });
 
   it("adds tags to path operations", () => {
-    expect(result.paths["/test/first"].post!.tags).toEqual(
+    expect(result?.paths?.["/test/first"]?.post?.tags).toEqual(
       expect.arrayContaining(["ADD_TAG_ONE", "ADD_TAG_TWO"])
     );
   });

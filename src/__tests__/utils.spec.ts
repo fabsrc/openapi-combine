@@ -4,14 +4,14 @@ import { overIf, overPaths, overPath, eachPath, eachOperation } from "../utils";
 describe("overIf", () => {
   it("invokes over fn if key exists", () => {
     const spyFn = jest.fn();
-    const fn = overIf(R.lensProp("test"), spyFn);
+    const fn = overIf(R.lensPath(["test"]), spyFn);
     fn({ test: "hello" });
     expect(spyFn).toHaveBeenCalledWith("hello");
   });
 
   it("does not invoke over fn if key does not exists", () => {
     const spyFn = jest.fn();
-    const fn = overIf(R.lensProp("test"), spyFn);
+    const fn = overIf(R.lensPath(["test"]), spyFn);
     fn({ not: "hello" });
     expect(spyFn).not.toHaveBeenCalled();
   });
